@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorry, Windi!</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e0f7fa; /* Baby blue background */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .slide {
+            text-align: center;
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        h2 {
+            font-size: 36px;
+            color: #ff80ab; /* Soft pink */
+            animation: fadeIn 1s ease-in;
+        }
+        p {
+            font-size: 24px;
+            margin: 20px 0;
+            color: #4caf50; /* Green */
+            animation: fadeIn 1.5s ease-in;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ffeb3b; /* Yellow */
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        .iLoveU {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #ff4081; /* Pink */
+        }
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            color: #ff80ab;
+        }
+        .timer {
+            font-size: 28px;
+            color: #f48fb1; /* Pink */
+            margin-top: 20px;
+        }
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .gif {
+            width: 300px;
+            height: auto;
+            margin: 20px 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes moveText {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 28px;
+            }
+            p {
+                font-size: 20px;
+            }
+            button {
+                font-size: 16px;
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="slideStart" class="slide active">
+        <button onclick="startWebsite()">Mulai</button>
+    </div>
+    
+    <div id="slide1" class="slide">
+        <h2>Oops, I did it again...</h2>
+        <p>Sorry tadi pagi aku ketawain baju kamu 🙈</p>
+        <button onclick="nextSlide(2)">Next</button>
+    </div>
+    
+    <div id="slide2" class="slide">
+        <h2>Your beauty still outshines Bali’s sunsets 🌅</h2>
+        <p>But hey, I’ve got a surprise for you…</p>
+        <button onclick="nextSlide(3)">Next</button>
+    </div>
+    
+    <div id="slide3" class="slide">
+        <h2>Get ready for your Dim Sum! 🍽</h2>
+        <p>It’s on the way… OTW!</p>
+        <button onclick="nextSlide(4)">Next</button>
+    </div>
+    
+    <div id="slide4" class="slide">
+        <h2>But before that... I need to ask you something! 💌</h2>
+        <p>Press the "I ❤️ U" button and say it 5 times... Let’s see if you love me back! 😘</p>
+        <button id="iLoveUButton" onclick="incrementCounter()">I ❤️ U</button>
+        <p id="iLoveUText">Click and say "I ❤️ U" 5x for your Dim Sum!</p>
+        <p class="iLoveU">You've clicked <span id="loveCount">0</span> times!</p>
+    </div>
+
+    <div id="slide5" class="slide">
+        <h2>You're so close to your Dim Sum! 🥟</h2>
+        <p>Just a little more love, baby! 😍</p>
+        <button onclick="nextSlide(6)">Next</button>
+    </div>
+
+    <div id="slide6" class="slide">
+        <h2>Okay, you're officially the best!</h2>
+        <p>Get ready for your Dim Sum reward! 🎁</p>
+        <button onclick="nextSlide(7)">Next</button>
+    </div>
+
+    <div id="slide7" class="slide">
+        <h2>YOU'VE GOT DIM SUM TODAY! 🎉</h2>
+        <p>Enjoy your treat, love! 🥰</p>
+        <img src="giphy.gif" class="gif" alt="Dim Sum gif">
+        <p style="font-size: 40px; animation: moveText 10s linear infinite;">YOU'VE GOT DIM SUM TODAY!</p>
+        <div class="confetti" id="confetti"></div>
+        <button onclick="nextSlide(8)">Next</button>
+    </div>
+
+    <div id="slide8" class="slide">
+        <h2>Your Dim Sum is on the way! 🚚</h2>
+        <p>Just wait for your delicious Dim Sum to be delivered soon. 😋</p>
+        <button onclick="nextSlide(9)">End</button>
+    </div>
+
+    <!-- Slide 9 (Leave a message) -->
+    <div id="slide9" class="slide">
+        <h2>Leave a message for me, Windi! 💌</h2>
+        <form id="messageForm" action="https://formspree.io/f/mzzzzeld" method="POST">
+            <textarea name="message" placeholder="Leave a massage here..." rows="4" required></textarea><br>
+            <button type="submit">Send</button>
+        </form>
+        <footer class="footer">Made with ❤️ by Z</footer>
+    </div>
+
+    <!-- Slide 10 (Waiting for Dim Sum) -->
+    <div id="slide10" class="slide">
+        <h2>❤️ Selamat menunggu dimsumnya ya, maaf harus nunggu sejam ❤️</h2>
+        <img src="dimsum cina.gif" class="gif" alt="Dim Sum gif">
+        <footer class="footer">Made with ❤️ by Z</footer>
+    </div>
+
+    <audio id="backgroundAudio" src="Paul Partohap - VITAMIN U (Lyric Video) copy.mp3" preload="auto"></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+        let currentSlide = 1;
+        let audioStarted = false;
+        let loveCount = 0;
+        const iLoveUText = document.getElementById('iLoveUText');
+        const iLoveUButton = document.getElementById('iLoveUButton');
+        const loveCountText = document.getElementById('loveCount');
+        const confetti = document.getElementById('confetti');
+        
+        function startWebsite() {
+            document.getElementById('slideStart').classList.remove('active');
+            document.getElementById('backgroundAudio').play();
+            audioStarted = true;
+            nextSlide(1);
+        }
+
+        function nextSlide(slideNumber) {
+            document.getElementById('slide' + currentSlide).classList.remove('active');
+            currentSlide = slideNumber;
+            document.getElementById('slide' + currentSlide).classList.add('active');
+        }
+
+        function incrementCounter() {
+            loveCount++;
+            loveCountText.textContent = loveCount;
+            if (loveCount === 5) {
+                nextSlide(7); // Go to the Dim Sum slide
+            }
+        }
+
+        document.getElementById("messageForm").addEventListener("submit", function(e) {
+            e.preventDefault();  // Prevent the default form submission
+            setTimeout(function() {
+                nextSlide(10);  // Go to slide 10 after the form submission
+            }, 500);  // Allow time for the form submission action
+        });
+    </script>
+</body>
+</html>
